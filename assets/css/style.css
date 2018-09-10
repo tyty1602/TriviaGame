@@ -1,0 +1,26 @@
+body {
+    background-image: url("images/background.jpg");
+    font-family: 'Gamja Flower', cursive;
+    color: purple;
+    line-height: 1.8;
+ }
+
+ h1 {
+     text-align: center;
+     color:indigo;
+     font-family: 'Gamja Flower', cursive;
+ }
+
+.bigbox, .Answers {
+    background: rgba(255, 217, 0, 0.911);
+    color: purple;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.ScoreKeeper {
+    background: rgba(255, 217, 0, 0.911);
+    color: purple;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
