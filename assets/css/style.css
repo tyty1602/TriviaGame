@@ -24,3 +24,10 @@ body {
     padding-top: 25px;
     padding-bottom: 25px;
 }
+
+#questionBox {
+    background: rgba(255, 217, 0, 0.911);
+    color: purple;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
