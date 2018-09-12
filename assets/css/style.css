@@ -17,26 +17,25 @@ body {
     font-family: 'Gamja Flower', cursive;
  }
 
-.bigbox, .Answers {
+.bigbox, .Answers, .ScoreKeeper, .correctKeeper, .incorrectKeeper {
     background: rgba(255, 217, 0, 0.911);
     color: purple;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     border-radius: 10%;
+    text-align: center;
 }
 
-.ScoreKeeper {
+#questionBox {
     background: rgba(255, 217, 0, 0.911);
     color: purple;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     border-radius: 10%;
+    text-align: center;
 }
 
-#questionBox, #timerBox {
-    background: rgba(255, 217, 0, 0.911);
-    color: purple;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border-radius: 10%;
+.buttonContainer {
+    align-items: center;
+    text-align: center;
 }

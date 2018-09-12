@@ -1,5 +1,9 @@
 
 $(document).ready(function () {
+
+        //remove click handler
+        $("answerButton").off("click");
+
     var triviaCard = [
         //"response_code": 0,
         {
@@ -137,7 +141,8 @@ $(document).ready(function () {
     var incorrect = 0;
     var correct = 0;
     var randomTrivia;
-    var timer =0;
+    // var timer =0;
+    var count =0;
 
     //JS code here
 
@@ -157,25 +162,30 @@ $(document).ready(function () {
     };
 
     function timerCheck() {
-        console.log("timerworks");
-        var sec = 10;
-        timer = setInterval(function () {
-            $('#timerBox').text(sec--);
-            // if (sec == -1) {
-            //     $('#timerBox').text();
-            //     clearInterval(timer);
-            // }
+
+        count = 15;
+        timer = setInterval(function() {
+          console.log(count);
+          $("#timerBox").html();
+          count--;
+          if(count === 0) {
+            stopInterval()
+          }
         }, 1000);
-        if (timer == 0) {
-            nextCard();
-            incorrect++;
+        
+        var stopInterval = function() {
+          console.log('time is up!');
+          alert("Time is Up");
+          clearInterval(timer);
         }
+        
     };
 
-    //On Click and check answers:
+    //On Click and check answers
 
     function answerReview() {
         $('.answerButton').click(function () {
+            event.preventDefault();
             console.log("doesonlickwork?");
             event.stopPropagation();
             var response = $(this).val();
@@ -184,11 +194,11 @@ $(document).ready(function () {
             if (response === randomTrivia.correct_answer) {
                 correct++;
                 console.log("responsework?");
-                $(".correctKeeper").html(correct);
+                $(".correctKeeper").html("Your correct score is: " + correct);
             }
             else {
                 incorrect++;
-                $(".incorrectKeeper").html(incorrect);
+                $(".incorrectKeeper").html("Your Incorrect score is: " +incorrect);
             }
             nextCard();
         });
