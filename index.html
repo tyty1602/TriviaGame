@@ -21,20 +21,28 @@
     <div class="container">
        
         <div class="row">
-            <div class="col-12 bigBox">
-                <h6 class="bigBox"></h6>
+            <div class="col-10">
                 <p id="questionBox"></p>
-                <p id="start"></p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 Answers">
+            <div class="col-10">
+                <h6>Your countdown clock...</h6>
+                <p id ="timerBox"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-10 Answers">
                 <h5 id="answerBox"></h5>
-                    <button class ="button" id ="button1"></button>
+                <div class="buttonContainer">
+
+                </div>
+                    <!-- <button class ="button" id ="button1"></button>
                     <button class ="button" id ="button2"></button>
                     <button class ="button" id ="button3"></button>
-                    <button class ="button" id ="button4"></button>
+                    <button class ="button" id ="button4"></button> -->
             </div>
             <!-- <div class="col-6 Answer2 Answers">
                     <h6 id="tittle">Answer 2 Placeholder</h6>
@@ -63,11 +71,13 @@
 
 <div class="container">
             <div class="row">
-                    <div class="col-6 ScoreKeeper">
+                    <div class="col-5 ScoreKeeper">
                         <h6 id="Correct">Correct Response</h6>
+                            <p class ="correctKeeper"> </p>
                     </div>
-                    <div class="col-6 ScoreKeeper">
+                    <div class="col-5 ScoreKeeper">
                         <h6 id="Incorrect">Incorrect Response</h6>
+                            <p class ="incorrectKeeper"></p>
                     </div>
                 </div>        
 </div>
