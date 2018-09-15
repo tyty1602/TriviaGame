@@ -1,8 +1,4 @@
-
 $(document).ready(function () {
-
-        //remove click handler
-        $("answerButton").off("click");
 
     var triviaCard = [
         //"response_code": 0,
@@ -138,18 +134,19 @@ $(document).ready(function () {
         }
     ];
 
-    var incorrect = 0;
-    var correct = 0;
+    var incorrect;
+    var correct;
     var randomTrivia;
-    // var timer =0;
-    var count =0;
+    var count;
+    var timer;
 
-    //JS code here
-
+    //Function new game that append the buttons to the empty div in HTML
     function newGame() {
-        // console.log("Does new game work?")
+        correct = 0;
+        incorrect = 0;
         randomTrivia = triviaCard[Math.floor(Math.random() * triviaCard.length)];
         $("#questionBox").text(randomTrivia.question);
+        $(".buttonContainer").empty();
         for (var i = 0; i < randomTrivia.answers.length; i++) {
             var button = $("<button>").html(randomTrivia.answers[i]);
             $(button).attr("class", "answerButton");
@@ -157,53 +154,57 @@ $(document).ready(function () {
             $(button).attr("id", "button" + i);
             $(".buttonContainer").append(button);
         }
-        correct=0;
-        incorrect=0;
+        $(document).on("click", ".answerButton", answerReview);
+        
+        $(".correctKeeper").html("Your correct score is: " + correct);
+        $(".incorrectKeeper").html("Your Incorrect score is: " + incorrect);
+
+        startTimer();
     };
 
-    function timerCheck() {
-
-        count = 15;
-        timer = setInterval(function() {
-          console.log(count);
-          $("#timerBox").html();
-          count--;
-          if(count === 0) {
-            stopInterval()
-          }
-        }, 1000);
-        
-        var stopInterval = function() {
-          console.log('time is up!');
-          alert("Time is Up");
-          clearInterval(timer);
+    function startTimer() {
+        count = 30;
+        if(!timer)
+        {
+            $("#timerBox").html(count);
+            timer = setInterval(myTimer, 1000);
         }
-        
     };
 
-    //On Click and check answers
+    function myTimer() {
+        $("#timerBox").html(count);
+        if (count < 1) {
+            stopInterval();
+        }
+        count--;
+    };
+
+    function stopInterval() {
+        console.log('time is up!');
+        alert("Time is Up");
+        clearInterval(timer);
+        incorrect++;
+        $(".incorrectKeeper").html("Your Incorrect score is: " + incorrect);
+        checkEndGame();
+        nextCard();
+    };
+
 
     function answerReview() {
-        $('.answerButton').click(function () {
-            event.preventDefault();
-            console.log("doesonlickwork?");
-            event.stopPropagation();
-            var response = $(this).val();
-            console.log("response " + response);
-            console.log("correct answer " + randomTrivia.correct_answer);
-            if (response === randomTrivia.correct_answer) {
-                correct++;
-                console.log("responsework?");
-                $(".correctKeeper").html("Your correct score is: " + correct);
-            }
-            else {
-                incorrect++;
-                $(".incorrectKeeper").html("Your Incorrect score is: " +incorrect);
-            }
-            nextCard();
-        });
+        event.stopPropagation();
+        var response = $(this).val();
+        console.log("correct answer " + randomTrivia.correct_answer);
+        if (response === randomTrivia.correct_answer) {
+            correct++;
+            $(".correctKeeper").html("Your correct score is: " + correct);
+        }
+        else {
+            incorrect++;
+            $(".incorrectKeeper").html("Your Incorrect score is: " + incorrect);
+        }
+        checkEndGame();
+        nextCard();
     };
-
 
     function nextCard() {
         randomTrivia = triviaCard[Math.floor(Math.random() * triviaCard.length)];
@@ -216,21 +217,21 @@ $(document).ready(function () {
         $("#button2").html(randomTrivia.answers[2]);
         $("#button3").attr("value", randomTrivia.answers[3]);
         $("#button3").html(randomTrivia.answers[3]);
+        startTimer();
     };
 
-    // //         // GET VALUE FROM BUTTON LINK: https://stackoverflow.com/questions/487056/retrieve-button-value-with-jquery
+    function checkEndGame() {
+        if (correct >= 5) {
+            alert("Congratulations! Thanks for playing.");
+            newGame();
+        }
+        else if (incorrect >= 7) {
+            alert("Better luck next time!")
+            newGame();
+        }
+    };
 
-    // //         // AFTER BUTTON CLICKED 
-    // //         // CHECK FOR CORRECT ANSWER FUNCTION
-    // //         // GET THE VALUE OF THE BUTTON
-    // //         // IF THE VALUE IS THE CORRECT ANSWER 
-    // //             // DISPLAY CORRECT CHOICE
-    // //         // ELSE 
-    // //             // DISPLAY INCORRECT ANSWER
 
-
-    //Onclick
+    // start the game
     newGame();
-    timerCheck();
-    $(document).on("click", ".answerButton", answerReview);
 });

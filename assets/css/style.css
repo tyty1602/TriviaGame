@@ -26,7 +26,7 @@ body {
     text-align: center;
 }
 
-#questionBox {
+#questionBox, #timerBox {
     background: rgba(255, 217, 0, 0.911);
     color: purple;
     padding-top: 50px;
